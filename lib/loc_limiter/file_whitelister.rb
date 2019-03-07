@@ -3,7 +3,7 @@
 module LocLimiter
   class FileWhitelister
     def match?(filename)
-      return false if filename.include?('spec.rb')
+      return false if filename.include?('spec/')
 
       true
     end
