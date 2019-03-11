@@ -34,14 +34,13 @@ module LocLimiter
         @status = FAILURE_STATUS
         @description = "Checked LOC – It #{calculated_changes}, it's bigger than maximum #{ADDITIONS_MAX_NUM}"
       end
-      byebug
       create_status
     end
 
     def create_status
       @github.create_status(
-        pull_request['base']['repo']['full_name'],
-        pull_request['head']['sha'],
+        pull_request.dig('base', 'repo', 'full_name'),
+        pull_request.dig('head', 'sha'),
         status,
         context: CONTEXT,
         description: description
@@ -61,12 +60,10 @@ module LocLimiter
     end
 
     def build_compare
-      master_commit = github.branch(pull_request['base']['repo']['full_name'],
-                                    'master')
       github.compare(
-        pull_request['base']['repo']['full_name'],
-        master_commit[:commit][:sha],
-        pull_request['head']['sha']
+        pull_request.dig('base', 'repo', 'full_name'),
+        pull_request.dig('base', 'sha'),
+        pull_request.dig('head', 'sha')
       )
     end
   end
