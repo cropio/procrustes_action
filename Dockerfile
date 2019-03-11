@@ -5,9 +5,9 @@ RUN bundle config --global frozen 1
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock /app/
 RUN bundle install
 
 COPY . .
 
-ENTRYPOINT ["bundle", "exec", "ruby", "app.rb"]
+ENTRYPOINT ["ruby", "app.rb"]
