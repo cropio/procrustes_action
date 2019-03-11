@@ -34,6 +34,7 @@ module LocLimiter
         @status = FAILURE_STATUS
         @description = "Checked LOC – It #{calculated_changes}, it's bigger than maximum #{ADDITIONS_MAX_NUM}"
       end
+      byebug
       create_status
     end
 
