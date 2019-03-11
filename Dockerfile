@@ -10,4 +10,4 @@ RUN bundle install
 
 COPY . .
 
-ENTRYPOINT ["ruby", "app.rb"]
+ENTRYPOINT ["ruby", "/app/app.rb"]
