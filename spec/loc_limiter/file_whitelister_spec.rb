@@ -47,5 +47,20 @@ RSpec.describe LocLimiter::FileWhitelister do
       let(:filename) { 'spec/models/field_spec.rb' }
       it { is_expected.to eq(false) }
     end
+
+    context 'config file does not match' do
+      let(:filename) { 'config/application.rb' }
+      it { is_expected.to eq(false) }
+    end
+
+    context 'config file in the middle' do
+      let(:filename) { 'app/config/application.rb' }
+      it { is_expected.to eq(true) }
+    end
+
+    context 'public file does not match' do
+      let(:filename) { 'public/404.html' }
+      it { is_expected.to eq(false) }
+    end
   end
 end
