@@ -1,0 +1,7 @@
+require: rubocop-rspec
+
+# Disable BlockLength for RSpec, ActiveAdmin and GraphQL.
+# RSpec, ActiveAdmin GraphQL DSLs build in way we should use large blocks
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'

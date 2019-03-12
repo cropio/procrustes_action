@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe LocLimiter::FileWhitelister do
+RSpec.describe Procrustes::FileWhitelister do
   let(:service) { described_class.new }
 
   describe '#match?' do

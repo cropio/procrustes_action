@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "filename": "app/models/field_shape.rb",
+      "additions" : 900
+    },
+    {
+      "filename": "app/models/field.rb",
+      "additions" : 200
+    }
+  ]
+}

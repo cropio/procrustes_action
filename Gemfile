@@ -11,4 +11,10 @@ group :development do
   gem 'byebug'
   gem 'pry'
   gem 'rspec'
+  gem 'rubocop'
+end
+
+group :test do
+  gem 'rubocop-rspec'
+  gem 'simplecov', require: false
 end

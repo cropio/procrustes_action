@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module LocLimiter
+module Procrustes
   class FileWhitelister
     def match?(filename)
       return false if filename.match?(/^spec\//)

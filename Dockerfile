@@ -5,8 +5,8 @@ LABEL "com.github.actions.description"="Limit PR adddition size to ADDITIONS_MAX
 LABEL "com.github.actions.icon"="shield"
 LABEL "com.github.actions.color"="blue"
 
-LABEL "repository"="https://github.com/ozeron/loc_limiter"
-LABEL "homepage"="https://github.com/ozeron/loc_limiter"
+LABEL "repository"="https://github.com/ozeron/procrustes"
+LABEL "homepage"="https://github.com/ozeron/procrustes"
 LABEL "maintainer"="Oleksandr Lapchenko <ozeron@me.com>"
 
 # throw errors if Gemfile has been modified since Gemfile.lock
@@ -15,7 +15,7 @@ RUN bundle config --global frozen 1
 WORKDIR /app
 
 COPY Gemfile Gemfile.lock /app/
-RUN bundle install --without development
+RUN bundle install --without development test
 
 COPY . .
 

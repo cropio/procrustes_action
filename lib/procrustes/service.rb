@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module LocLimiter
+module Procrustes
   class Service
-    CONTEXT = 'LOC limiter'
+    CONTEXT = 'PR size check'
 
     FAILURE_STATUS = 'failure'
     SUCCESS_STATUS = 'success'
