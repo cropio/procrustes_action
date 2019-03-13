@@ -25,11 +25,11 @@ module Procrustes
       @pull_request = payload.fetch('pull_request')
 
       if calculated_changes > ADDITIONS_MAX_NUM
-        puts "Checked LOC – It #{calculated_changes}, it's bigger than maximum #{ADDITIONS_MAX_NUM}"
+        puts "Checked LOC – PR change #{calculated_changes}, bigger than maximum #{ADDITIONS_MAX_NUM}"
         return false
       end
 
-      puts "Checked LOC – It smaller than #{ADDITIONS_MAX_NUM}"
+      puts "Checked LOC – PR change #{calculated_changes}, smaller than #{ADDITIONS_MAX_NUM}"
       true
     end
 
