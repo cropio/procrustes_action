@@ -2,8 +2,6 @@
 
 module Procrustes
   class Service
-    CONTEXT = 'PR size check'
-
     FAILURE_STATUS = 'failure'
     SUCCESS_STATUS = 'success'
     PENDING_STATUS = 'pending'
@@ -26,25 +24,13 @@ module Procrustes
 
       @pull_request = payload.fetch('pull_request')
 
-      create_status
-      @status = SUCCESS_STATUS
-      @description = "Checked LOC – It smaller than #{ADDITIONS_MAX_NUM}"
-
       if calculated_changes > ADDITIONS_MAX_NUM
-        @status = FAILURE_STATUS
-        @description = "Checked LOC – It #{calculated_changes}, it's bigger than maximum #{ADDITIONS_MAX_NUM}"
+        puts "Checked LOC – It #{calculated_changes}, it's bigger than maximum #{ADDITIONS_MAX_NUM}"
+        return false
       end
-      create_status
-    end
 
-    def create_status
-      @github.create_status(
-        pull_request.dig('base', 'repo', 'full_name'),
-        pull_request.dig('head', 'sha'),
-        status,
-        context: CONTEXT,
-        description: description
-      )
+      puts "Checked LOC – It smaller than #{ADDITIONS_MAX_NUM}"
+      true
     end
 
     def calculated_changes

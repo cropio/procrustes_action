@@ -12,15 +12,9 @@ RSpec.describe Procrustes::Service do
   let(:service) { described_class.new(github: github, file_selector: selector) }
 
   describe '#perform!' do
+    subject(:action) { service.perform!(payload) }
+
     let(:payload) { load_fixture('pull_request.event.json') }
-    let(:pending_args) do
-      [
-        'ozeron/amazone_service',
-        'a930751d19af64b9fcc737b7f9ff294152174472',
-        'pending',
-        { context: 'PR size check', description: 'Checking line size' }
-      ]
-    end
 
     let(:compare_args) do
       [
@@ -31,12 +25,9 @@ RSpec.describe Procrustes::Service do
     end
 
     before do
-      allow(github).to receive(:create_status)
       allow(github).to(
         receive(:compare).with(*compare_args).and_return(compare_data)
       )
-
-      service.perform!(payload)
     end
 
     context 'when additions less than ADDITIONS_MAX_NUM' do
@@ -53,43 +44,16 @@ RSpec.describe Procrustes::Service do
         ]
       end
 
-      it 'creates pending status than success' do
-        expect(github).to have_received(:create_status).with(*pending_args).once
-      end
-
-      it 'creates compare request' do
-        expect(github).to have_received(:compare).with(*compare_args).once
-      end
-
-      it 'creates success status' do
-        expect(github).to have_received(:create_status).with(*success_args).once
+      it 'return true' do
+        expect(action).to eq(true)
       end
     end
 
     context 'when additions more than ADDITIONS_MAX_NUM' do
       let(:compare_data) { load_fixture('compare.failure.json') }
-      let(:failure_args) do
-        [
-          'ozeron/amazone_service',
-          'a930751d19af64b9fcc737b7f9ff294152174472',
-          'failure',
-          {
-            context: 'PR size check',
-            description: "Checked LOC – It 1100, it's bigger than maximum 1000"
-          }
-        ]
-      end
 
-      it 'creates pending status than success' do
-        expect(github).to have_received(:create_status).with(*pending_args).once
-      end
-
-      it 'creates compare request' do
-        expect(github).to have_received(:compare).with(*compare_args).once
-      end
-
-      it 'creates failure status' do
-        expect(github).to have_received(:create_status).with(*failure_args).once
+      it 'return false' do
+        expect(action).to eq(false)
       end
     end
   end

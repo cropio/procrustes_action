@@ -19,6 +19,9 @@ puts "RUNNIG PR CHECK WITH MAX SIZE #{Procrustes::ADDITIONS_MAX_NUM}"
 @selector ||= Procrustes::FileWhitelister.new
 
 payload = JSON.parse(File.read(GITHUB_EVENT_PATH))
-Procrustes::Service
+status = \
+  Procrustes::Service
   .new(github: @client, file_selector: @selector)
   .perform!(payload)
+
+exit 1 unless status
