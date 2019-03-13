@@ -1,7 +1,7 @@
 # GitHub Action which monitor Pull Request size
 
 ## How to add as Github Action
-1. In action name put `ozeron/procrustes_action@master`
+1. In action name put `cropio/procrustes_action@master`
 2. That's it
 
 This code expect to work with data from `GITHUB_EVENT_PATH` env variable, so copy payload from github api manualy or use default fixture
