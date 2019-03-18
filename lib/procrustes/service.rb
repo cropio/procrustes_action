@@ -20,7 +20,7 @@ module Procrustes
     end
 
     def perform!(payload)
-      return unless PROCESSABLE_ACTIONS.include?(payload.fetch('action'))
+      return true unless PROCESSABLE_ACTIONS.include?(payload.fetch('action'))
 
       @pull_request = payload.fetch('pull_request')
 
